@@ -1,6 +1,13 @@
 package baseball.baseball.controllers;
 
 import baseball.baseball.models.Team;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvValidationException;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 
 public class TeamManager implements Manager<Team> {
@@ -12,6 +19,38 @@ public class TeamManager implements Manager<Team> {
         teamList = new HashMap<String, Team>();
         canWriteToFile = writeFiles;
     }
+
+    public TeamManager(boolean writeFiles, String filePath) {
+        this(writeFiles);
+        if(canWriteToFile) {
+            loadTeamsFromFile(filePath);
+        }
+    }
+
+    private void loadTeamsFromFile(String filePath) {
+        CSVReader reader = null;
+        try {
+            reader = new CSVReader(new FileReader(filePath));
+            String[] line;
+            reader.readNext();
+            while ((line = reader.readNext()) != null) {
+                // Process each line
+                Team t = new Team(line[1]);
+                addNewEntryToList(new Team(line[1]));
+            }
+        } catch (IOException | CsvValidationException e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     @Override
     public Team getFromList() {
         return null;
@@ -25,6 +64,34 @@ public class TeamManager implements Manager<Team> {
     }
     private boolean isEntryInList(String name) {
         return teamList.containsKey(name);
+    }
+
+    public void commitChangesToFile(String filePath) {
+        CSVWriter writer = null;
+        try {
+            writer = new CSVWriter(new FileWriter(filePath));
+
+            // Writing header
+            String[] header = {"Id", "Team Name"};
+            writer.writeNext(header);
+            int id = 1;
+            for (String key : teamList.keySet()) {
+                writer.writeNext(new String[]{Integer.toString(id), key});
+                id++;
+            }
+            // Add more data as needed
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
     @Override
     public void deleteEntry(Team team) {
