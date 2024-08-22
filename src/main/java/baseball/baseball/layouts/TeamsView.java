@@ -14,7 +14,7 @@ public class TeamsView extends JPanel {
     public JLabel team1_text;
     public JLabel team2_text;
     public JButton select;
-    JButton select2;
+    public JButton select2;
     public JButton createNewTeam;
     JButton playerSelectionButton;
     private ArrayList<Team> teams;

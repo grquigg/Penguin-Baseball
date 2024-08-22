@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestTeamManager {
+    /*
+    IMPORTANT: The test.csv file should only be used for TESTING and not the save file for production purposes
+     */
     //what assumptions can we make about a teamManager instance?
     private TeamManager tm;
     private static final String dir_name = "data";

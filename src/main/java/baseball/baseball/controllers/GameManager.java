@@ -1,10 +1,10 @@
 package baseball.baseball.controllers;
 
-import baseball.baseball.models.Game;
+import baseball.baseball.models.*;
 
 import java.util.ArrayList;
 
-public class GameManager implements Manager<Game> {
+public class GameManager implements Manager<Game>, GameFactory {
 
     private ArrayList<Game> gameList;
     public GameManager() {
@@ -37,5 +37,10 @@ public class GameManager implements Manager<Game> {
     @Override
     public int size() {
         return 0;
+    }
+
+    @Override
+    public AbstractGame createAbstractGame(Team teamA, Team teamB) {
+        return null;
     }
 }

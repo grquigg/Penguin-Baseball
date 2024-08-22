@@ -1,7 +1,6 @@
 package baseball.baseball.models;
 
 public interface GameFactory {
-    Game createAbstractGame();
-    AbstractInning createAbstractInning();
+    AbstractGame createAbstractGame(Team teamA, Team teamB);
 }
 

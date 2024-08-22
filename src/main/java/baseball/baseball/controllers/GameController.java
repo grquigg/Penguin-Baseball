@@ -37,12 +37,21 @@ public class GameController {
         selectTeamsMenu.select.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                String team = (String) selectTeamsMenu.list.getSelectedValue();
-//                selectTeamsMenu.team1_text.setText(team);
-//                team1 = gm.getTeam(selectTeamsMenu.list.getSelectedIndex());
-//                gameModel.setTeamA(t1);
+                String team = (String) selectTeamsMenu.list.getSelectedValue();
+                selectTeamsMenu.team1_text.setText(team);
+                team1 = team_man.getFromListByName((String) selectTeamsMenu.list.getSelectedValue());
             }
         });
+
+        selectTeamsMenu.select2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String team = (String) selectTeamsMenu.list.getSelectedValue();
+                selectTeamsMenu.team1_text.setText(team);
+                team1 = team_man.getFromListByName((String) selectTeamsMenu.list.getSelectedValue());
+            }
+        });
+
 
         selectTeamsMenu.createNewTeam.addActionListener(new ActionListener() {
             @Override
