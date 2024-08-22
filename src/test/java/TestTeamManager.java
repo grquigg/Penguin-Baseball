@@ -85,16 +85,19 @@ public class TestTeamManager {
     @Test
     void testReadDataFromExistingFile() {
         TeamManager tFile = new TeamManager(true, "C:\\Users\\grego\\Documents\\JavaProjects\\PenguinBaseball\\src\\main\\resources\\test.csv");
-        assertEquals(tFile.size(), 1);
+        assertEquals(1, tFile.size());
     }
 
     @Test
     void testSaveNewTeamsToFile() {
         TeamManager tFile = new TeamManager(true, "C:\\Users\\grego\\Documents\\JavaProjects\\PenguinBaseball\\src\\main\\resources\\test.csv");
-        assertEquals(tFile.size(), 1);
+        assertEquals(1, tFile.size());
         tFile.addNewEntryToList(new Team("Red Sox"));
         tFile.commitChangesToFile("C:\\Users\\grego\\Documents\\JavaProjects\\PenguinBaseball\\src\\main\\resources\\test.csv");
         TeamManager tFile2 = new TeamManager(true, "C:\\Users\\grego\\Documents\\JavaProjects\\PenguinBaseball\\src\\main\\resources\\test.csv");
-        assertEquals(tFile2.size(), 2);
+        assertEquals(2, tFile2.size());
+        tFile2.deleteEntry(tFile2.getFromListByName("Red Sox"));
+        tFile2.commitChangesToFile("C:\\Users\\grego\\Documents\\JavaProjects\\PenguinBaseball\\src\\main\\resources\\test.csv");
+        assertEquals(1, tFile2.size());
     }
 }
