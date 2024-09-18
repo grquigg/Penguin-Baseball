@@ -21,14 +21,17 @@ public class GameController {
     private static TeamManager team_man;
     private static GameView gameView;
     private static String directory;
-    public GameController(String dir_name, GameManager manager, GameView view) {
+    public GameController(String dir_name, GameManager manager, GameView view, boolean canRead) {
         gm = manager;
         gameView = view;
-        team_man = new TeamManager(false);
+        team_man = new TeamManager(canRead, dir_name);
         directory = dir_name;
         setupTeamsViewController(gameView.getTeamsView(), gameView.getNewTeamsView());
     }
 
+    public TeamManager returnTeamManager() {
+        return team_man;
+    }
     private void updateList(String newName) {
         gameView.getTeamsView().updateComponent(newName);
     }

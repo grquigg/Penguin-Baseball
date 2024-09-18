@@ -16,7 +16,7 @@ public class Main {
             GameManager gm = new GameManager();
 
             GameView view = new GameView("Penguin Baseball");
-            GameController controller = new GameController(args[0], gm, view);
+            GameController controller = new GameController(args[0], gm, view, true);
 //            controller.listenForCommandLine();
 
             view.setVisible(true);
